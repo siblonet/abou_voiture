@@ -16,7 +16,7 @@ const DisplayCars = async () => {
               <p class="large">Cette voiture est en très bon état, une très bonne occasion a ne pas rater</p>
            </div>
            <div class="full button_section margin_top_30">
-              <a href="viewer.html#${car._id}">Plus Info</a>
+              <a href="details_view#${car._id}">Plus Info</a>
            </div>
         </div>
 

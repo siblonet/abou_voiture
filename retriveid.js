@@ -1,8 +1,7 @@
 // Function to get URL parameter from the hash
-function getUrlParameter(param) {
+function getUrlParameter() {
     const hash = window.location.hash.substring(1); // Remove the '#' character
-    const params = new URLSearchParams(hash);
-    return params.get(param);
+    return hash;
 }
 
 // Function to populate the gallery with retrieved ID
@@ -13,7 +12,7 @@ const populateReal = async (retrid) => {
             console.error("Gallery element not found.");
             return;
         }
-        
+
         gallery.id = retrid;
 
         const imao = await requesttoBackend('GET', `retirveone/${retrid}`);
@@ -27,7 +26,7 @@ const populateReal = async (retrid) => {
 }
 
 // Retrieve the ID from the hash
-const retriva = getUrlParameter('id'); // Assuming the hash is something like '#id=lkndklnfvd4654'
+const retriva = getUrlParameter(); // Assuming the hash is something like '#id=lkndklnfvd4654'
 
 if (!retriva || retriva.length < 5) {
     console.log(retriva);
