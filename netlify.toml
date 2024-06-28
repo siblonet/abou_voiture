@@ -1,0 +1,8 @@
+[[redirects]]
+from = "/detail_view"
+to = "/viewer.html"
+status = 200
+
+[[redirects]]
+from = "details_view*"
+to = "/detail_view:splat"
