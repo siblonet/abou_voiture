@@ -1,29 +1,32 @@
 const cars_rendering = document.getElementById('render_cares');
+const apiUrlfine = 'https://nuance-doud.adaptable.app/aboucar/';
+
+const requesttoBackend = async (method, endpoint, data = null) => {
+    const options = {
+        method,
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    };
+
+    if (data) {
+        options.body = JSON.stringify(data);
+    }
+
+    const response = await fetch(apiUrlfine + endpoint, options);
+    const responseData = await response.json();
+
+    if (!response.ok) {
+        return false
+    }
+
+    return responseData;
+};
 
 const DisplayCars = async () => {
-    console.log("called");
-    const car_content = [{
-        _id: "4970kh567rqsax",
-        image: [
-            {
-                ima: "images/a1.jpg"
-            },
-            {
-                ima: "images/a2.jpg"
-            },
-            {
-                ima: "images/a3.jpg"
-            },
-            {
-                ima: "images/a4.jpg"
-            },
-            {
-                ima: "images/a5.jpg"
-            }
-        ],
-        phone: "0545400359"
-    }
-    ];
+    //const car_content = await requesttoBackend('GET', `cars/${old_posi}/${who == 'all' ? sarr : 15}`);
+    const car_content = await requesttoBackend('GET', "");
+    console.log(car_content);
 
     cars_rendering.innerHTML = "";
     if (car_content.length) {
@@ -38,11 +41,11 @@ const DisplayCars = async () => {
               <p class="large">Cette voiture est en très bon état, une très bonne occasion a ne pas rater</p>
            </div>
            <div class="full button_section margin_top_30">
-              <a href="tel:${car.phone}">Plus Info</a>
+              <a href="https://wa.me/2250545400359">Plus Info</a>
            </div>
         </div>
 
-        <div class="col-lg-8">
+        <a href="https://wa.me/2250545400359" class="col-lg-8">
            <div class="full margin_top_50_rs">
               <div class="car_viewa">
                  <img class="img-responsive" src="${car.image[0].ima}" alt="#" />
@@ -54,7 +57,7 @@ const DisplayCars = async () => {
                  <img class="img-responsive" src="${car.image[4].ima}" alt="#" />
               </div>
            </div>
-        </div>
+        </a>
 
      </div>  
                         `;
