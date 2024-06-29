@@ -13,9 +13,16 @@ const populateReal = async (retrid) => {
             return;
         }
 
+        /*
+            <meta id="imageid" property="og:image" content="">
+            <meta id="urlid" property="og:url" content="">
+        */
         gallery.id = retrid;
 
         const imao = await requesttoBackend('GET', `retirveone/${retrid}`);
+        document.getElementById("imageid").content = imao.image[0].ima;
+        document.getElementById("urlid").content = `https://abouvoiture.netlify.app/details_view#${retrid}`;
+        document.getElementById("chatid").href = `https://wa.me/2250545400359?text=${encodeURIComponent('Bonjour M.Abou, puis-je avoir plus de détail concernant cet voiture?: ' + imao.image[0].ima)}`;
 
         gallery.innerHTML = `
             ${imao.image.map(img => `<a><img src="${img.ima}" alt="" width="600" height="400"></a>`).join('')}
